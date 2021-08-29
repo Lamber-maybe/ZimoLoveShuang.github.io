@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>子墨的博客</title>
+  
+  <subtitle>总得让实力配上野心</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://blog.zimo.wiki/"/>
+  <updated>2021-08-29T13:20:10.832Z</updated>
+  <id>https://blog.zimo.wiki/</id>
+  
+  <author>
+    <name>子墨</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/29</title>
+    <link href="https://blog.zimo.wiki/posts/f4d069c8/"/>
+    <id>https://blog.zimo.wiki/posts/f4d069c8/</id>
+    <published>2021-08-29T13:18:33.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：1588-所有奇数长度子数组的和"><a href="#题目：1588-所有奇数长度子数组的和" class="headerlink" title="题目：1588. 所有奇数长度子数组的和"></a>题目：1588. 所有奇数长度子数组的和</h2><p>难度：简单</p><p>给你一个正整数数组 arr ，请你计算所有可能的奇数长度子数组的和。</p><p><strong>子数组</strong> 定义为原数组中的一个连续子序列。</p><p>请你返回 arr 中 <strong>所有奇数长度子数组的和</strong> 。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">输入：arr = [1,4,2,5,3]</span><br><span class="line">输出：58</span><br><span class="line">解释：所有奇数长度子数组和它们的和为：</span><br><span class="line">[1] = 1</span><br><span class="line">[4] = 4</span><br><span class="line">[2] = 2</span><br><span class="line">[5] = 5</span><br><span class="line">[3] = 3</span><br><span class="line">[1,4,2] = 7</span><br><span class="line">[4,2,5] = 11</span><br><span class="line">[2,5,3] = 10</span><br><span class="line">[1,4,2,5,3] = 15</span><br><span class="line">我们将所有值求和得到 1 + 4 + 2 + 5 + 3 + 7 + 11 + 10 + 15 = 58</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：arr = [1,2]</span><br><span class="line">输出：3</span><br><span class="line">解释：总共只有 2 个长度为奇数的子数组，[1] 和 [2]。它们的和为 3 。</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：arr = [10,11,12]</span><br><span class="line">输出：66</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= arr.length &lt;= 100</li><li>1 &lt;= arr[i] &lt;= 1000</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/sum-of-all-odd-length-subarrays/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/sum-of-all-odd-length-subarrays/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>不想思考了，直接暴力吧</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sumOddLengthSubarrays</span><span class="params">(self, arr: List[int])</span> -&gt; int:</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        n = len(arr)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i,n):</span><br><span class="line">                <span class="keyword">if</span> (j - i + <span class="number">1</span>) &amp; <span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">for</span> k <span class="keyword">in</span> range(i,j + <span class="number">1</span>):</span><br><span class="line">                        ans += arr[k]</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：1588-所有奇数长度子数组的和&quot;&gt;&lt;a href=&quot;#题目：1588-所有奇数长度子数组的和&quot; class=&quot;headerlink&quot; title=&quot;题目：1588. 所有奇数长度子数组的和&quot;&gt;&lt;/a&gt;题目：1588. 所有奇数长度子数组的和&lt;/h2&gt;&lt;p&gt;
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数组" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/28</title>
+    <link href="https://blog.zimo.wiki/posts/83d7595e/"/>
+    <id>https://blog.zimo.wiki/posts/83d7595e/</id>
+    <published>2021-08-28T04:53:18.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：1480-一维数组的动态和"><a href="#题目：1480-一维数组的动态和" class="headerlink" title="题目：1480. 一维数组的动态和"></a>题目：1480. 一维数组的动态和</h2><p>难度：简单</p><p>给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) 。</p><p>请返回 nums 的动态和。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3,4]</span><br><span class="line">输出：[1,3,6,10]</span><br><span class="line">解释：动态和计算过程为 [1, 1+2, 1+2+3, 1+2+3+4] 。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1,1,1,1]</span><br><span class="line">输出：[1,2,3,4,5]</span><br><span class="line">解释：动态和计算过程为 [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1] 。</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,1,2,10,1]</span><br><span class="line">输出：[3,4,6,16,17]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= nums.length &lt;= 1000</li><li>-10^6 &lt;= nums[i] &lt;= 10^6</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/running-sum-of-1d-array/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/running-sum-of-1d-array/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>一个简单的前缀和题目，直接原地修改即可</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">runningSum</span><span class="params">(self, nums: List[int])</span> -&gt; List[int]:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(nums)):</span><br><span class="line">            nums[i] += nums[i - <span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：1480-一维数组的动态和&quot;&gt;&lt;a href=&quot;#题目：1480-一维数组的动态和&quot; class=&quot;headerlink&quot; title=&quot;题目：1480. 一维数组的动态和&quot;&gt;&lt;/a&gt;题目：1480. 一维数组的动态和&lt;/h2&gt;&lt;p&gt;难度：简单&lt;/p&gt;
+&lt;p
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数组" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+      <category term="前缀和" scheme="https://blog.zimo.wiki/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/27</title>
+    <link href="https://blog.zimo.wiki/posts/136844cf/"/>
+    <id>https://blog.zimo.wiki/posts/136844cf/</id>
+    <published>2021-08-27T09:22:03.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：295-数据流的中位数"><a href="#题目：295-数据流的中位数" class="headerlink" title="题目：295. 数据流的中位数"></a>题目：295. 数据流的中位数</h2><p>难度：困难</p><p>中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。</p><p>例如，</p><p>[2,3,4] 的中位数是 3</p><p>[2,3] 的中位数是 (2 + 3) / 2 = 2.5</p><p>设计一个支持以下两种操作的数据结构：</p><ul><li>void addNum(int num) - 从数据流中添加一个整数到数据结构中。</li><li>double findMedian() - 返回目前所有元素的中位数。</li></ul><p><strong>示例：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">addNum(1)</span><br><span class="line">addNum(2)</span><br><span class="line">findMedian() -&gt; 1.5</span><br><span class="line">addNum(3) </span><br><span class="line">findMedian() -&gt; 2</span><br></pre></td></tr></table></figure><p><strong>进阶:</strong></p><ol><li>如果数据流中所有整数都在 0 到 100 范围内，你将如何优化你的算法？</li><li>如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？</li></ol><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/find-median-from-data-stream/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/find-median-from-data-stream/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>有 有，，有，，，有序数组？</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sortedcontainers <span class="keyword">import</span> SortedList</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        initialize your data structure here.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.nums = SortedList()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addNum</span><span class="params">(self, num: int)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.nums.add(num)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMedian</span><span class="params">(self)</span> -&gt; float:</span></span><br><span class="line">        n = len(self.nums)</span><br><span class="line">        <span class="keyword">if</span> n &amp; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> self.nums[n // <span class="number">2</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> (self.nums[n // <span class="number">2</span>] + self.nums[n // <span class="number">2</span> - <span class="number">1</span>]) / <span class="number">2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your MedianFinder object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = MedianFinder()</span></span><br><span class="line"><span class="comment"># obj.addNum(num)</span></span><br><span class="line"><span class="comment"># param_2 = obj.findMedian()</span></span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：295-数据流的中位数&quot;&gt;&lt;a href=&quot;#题目：295-数据流的中位数&quot; class=&quot;headerlink&quot; title=&quot;题目：295. 数据流的中位数&quot;&gt;&lt;/a&gt;题目：295. 数据流的中位数&lt;/h2&gt;&lt;p&gt;难度：困难&lt;/p&gt;
+&lt;p&gt;中位数是有序列
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="设计" scheme="https://blog.zimo.wiki/tags/%E8%AE%BE%E8%AE%A1/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/25</title>
+    <link href="https://blog.zimo.wiki/posts/fd6625e3/"/>
+    <id>https://blog.zimo.wiki/posts/fd6625e3/</id>
+    <published>2021-08-25T08:25:28.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：797-所有可能的路径"><a href="#题目：797-所有可能的路径" class="headerlink" title="题目：797. 所有可能的路径"></a>题目：797. 所有可能的路径</h2><p>难度：中等</p><p>给你一个有 n 个节点的 <strong>有向无环图（DAG）</strong>，请你找出所有从节点 0 到节点 n-1 的路径并输出（<strong>不要求按特定顺序</strong>）</p><p>二维数组的第 i 个数组中的单元都表示有向图中 i 号节点所能到达的下一些节点，空就是没有下一个结点了。</p><p>译者注：有向图是有方向的，即规定了 a→b 你就不能从 b→a 。</p><p><strong>示例 1：</strong></p><img style="height: 242px; width: 242px;" src="https://assets.leetcode.com/uploads/2020/09/28/all_1.jpg" alt><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1,2],[3],[3],[]]</span><br><span class="line">输出：[[0,1,3],[0,2,3]]</span><br><span class="line">解释：有两条路径 0 -&gt; 1 -&gt; 3 和 0 -&gt; 2 -&gt; 3</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><img style="height: 301px; width: 423px;" src="https://assets.leetcode.com/uploads/2020/09/28/all_2.jpg" alt><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[4,3,1],[3,2,4],[3],[4],[]]</span><br><span class="line">输出：[[0,4],[0,3,4],[0,1,3,4],[0,1,2,3,4],[0,1,4]]</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1],[]]</span><br><span class="line">输出：[[0,1]]</span><br></pre></td></tr></table></figure><p><strong>示例 4：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1,2,3],[2],[3],[]]</span><br><span class="line">输出：[[0,1,2,3],[0,2,3],[0,3]]</span><br></pre></td></tr></table></figure><p><strong>示例 5：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1,3],[2],[3],[]]</span><br><span class="line">输出：[[0,1,2,3],[0,3]]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>n == graph.length</li><li>2 &lt;= n &lt;= 15</li><li>0 &lt;= graph[i][j] &lt; n</li><li>graph[i][j] != i（即，不存在自环）</li><li>graph[i] 中的所有元素 <strong>互不相同</strong></li><li>保证输入为 <strong>有向无环图（DAG）</strong></li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/all-paths-from-source-to-target/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/all-paths-from-source-to-target/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>回溯</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">allPathsSourceTarget</span><span class="params">(self, graph: List[List[int]])</span> -&gt; List[List[int]]:</span></span><br><span class="line">        n = len(graph)</span><br><span class="line">        ans = []</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(s,e,t)</span>:</span></span><br><span class="line">            <span class="keyword">nonlocal</span> graph</span><br><span class="line">            <span class="keyword">if</span> s == e:</span><br><span class="line">                ans.append(list(t))</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> graph[s]:</span><br><span class="line">                t.append(i)</span><br><span class="line">                dfs(i,e,t)</span><br><span class="line">                t.pop()</span><br><span class="line">        dfs(<span class="number">0</span>,n - <span class="number">1</span>,[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：797-所有可能的路径&quot;&gt;&lt;a href=&quot;#题目：797-所有可能的路径&quot; class=&quot;headerlink&quot; title=&quot;题目：797. 所有可能的路径&quot;&gt;&lt;/a&gt;题目：797. 所有可能的路径&lt;/h2&gt;&lt;p&gt;难度：中等&lt;/p&gt;
+&lt;p&gt;给你一个有 n
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="深度优先搜索" scheme="https://blog.zimo.wiki/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/"/>
+    
+      <category term="dfs" scheme="https://blog.zimo.wiki/tags/dfs/"/>
+    
+      <category term="回溯算法" scheme="https://blog.zimo.wiki/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="图" scheme="https://blog.zimo.wiki/tags/%E5%9B%BE/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/23</title>
+    <link href="https://blog.zimo.wiki/posts/140580d6/"/>
+    <id>https://blog.zimo.wiki/posts/140580d6/</id>
+    <published>2021-08-23T13:31:43.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：1646-获取生成数组中的最大值"><a href="#题目：1646-获取生成数组中的最大值" class="headerlink" title="题目：1646. 获取生成数组中的最大值"></a>题目：1646. 获取生成数组中的最大值</h2><p>难度：简单</p><p>给你一个整数 n 。按下述规则生成一个长度为 n + 1 的数组 nums ：</p><ul><li>nums[0] = 0</li><li>nums[1] = 1</li><li>当 2 &lt;= 2 * i &lt;= n 时，nums[2 * i] = nums[i]</li><li>当 2 &lt;= 2 * i + 1 &lt;= n 时，nums[2 * i + 1] = nums[i] + nums[i + 1]</li></ul><p>返回生成数组 nums 中的 <strong>最大</strong> 值。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 7</span><br><span class="line">输出：3</span><br><span class="line">解释：根据规则：</span><br><span class="line">  nums[0] = 0</span><br><span class="line">  nums[1] = 1</span><br><span class="line">  nums[(1 * 2) = 2] = nums[1] = 1</span><br><span class="line">  nums[(1 * 2) + 1 = 3] = nums[1] + nums[2] = 1 + 1 = 2</span><br><span class="line">  nums[(2 * 2) = 4] = nums[2] = 1</span><br><span class="line">  nums[(2 * 2) + 1 = 5] = nums[2] + nums[3] = 1 + 2 = 3</span><br><span class="line">  nums[(3 * 2) = 6] = nums[3] = 2</span><br><span class="line">  nums[(3 * 2) + 1 = 7] = nums[3] + nums[4] = 2 + 1 = 3</span><br><span class="line">因此，nums = [0,1,1,2,1,3,2,3]，最大值 3</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 2</span><br><span class="line">输出：1</span><br><span class="line">解释：根据规则，nums[0]、nums[1] 和 nums[2] 之中的最大值是 1</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3</span><br><span class="line">输出：2</span><br><span class="line">解释：根据规则，nums[0]、nums[1]、nums[2] 和 nums[3] 之中的最大值是 2</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>0 &lt;= n &lt;= 100</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/get-maximum-in-generated-array/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/get-maximum-in-generated-array/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>模拟</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getMaximumGenerated</span><span class="params">(self, n: int)</span> -&gt; int:</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        nums = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        nums[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        nums[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="number">2</span> &lt;= <span class="number">2</span> * i &lt;= n:</span><br><span class="line">                nums[<span class="number">2</span> * i] = nums[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">2</span> &lt;= <span class="number">2</span> * i + <span class="number">1</span> &lt;= n:</span><br><span class="line">                nums[<span class="number">2</span> * i + <span class="number">1</span>] = nums[i] + nums[i + <span class="number">1</span>]</span><br><span class="line">        <span class="comment"># print(nums)</span></span><br><span class="line">        <span class="keyword">return</span> max(nums)</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：1646-获取生成数组中的最大值&quot;&gt;&lt;a href=&quot;#题目：1646-获取生成数组中的最大值&quot; class=&quot;headerlink&quot; title=&quot;题目：1646. 获取生成数组中的最大值&quot;&gt;&lt;/a&gt;题目：1646. 获取生成数组中的最大值&lt;/h2&gt;&lt;p&gt;
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数组" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/21</title>
+    <link href="https://blog.zimo.wiki/posts/fa0be1fa/"/>
+    <id>https://blog.zimo.wiki/posts/fa0be1fa/</id>
+    <published>2021-08-21T13:36:06.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：443-压缩字符串"><a href="#题目：443-压缩字符串" class="headerlink" title="题目：443. 压缩字符串"></a>题目：443. 压缩字符串</h2><p>难度：中等</p><p>给你一个字符数组 chars ，请使用下述算法压缩：</p><p>从一个空字符串 s 开始。对于 chars 中的每组 <strong>连续重复字符</strong> ：</p><ul><li>如果这一组长度为 1 ，则将字符追加到 s 中。</li><li>否则，需要向 s 追加字符，后跟这一组的长度。</li></ul><p>压缩后得到的字符串 s <strong>不应该直接返回</strong> ，需要转储到字符数组 chars 中。需要注意的是，如果组长度为 10 或 10 以上，则在 chars 数组中会被拆分为多个字符。</p><p>请在 <strong>修改完输入数组后</strong> ，返回该数组的新长度。</p><p>你必须设计并实现一个只使用常量额外空间的算法来解决此问题。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：chars = [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;]</span><br><span class="line">输出：返回 6 ，输入数组的前 6 个字符应该是：[&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;]</span><br><span class="line">解释：</span><br><span class="line">&quot;aa&quot; 被 &quot;a2&quot; 替代。&quot;bb&quot; 被 &quot;b2&quot; 替代。&quot;ccc&quot; 被 &quot;c3&quot; 替代。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：chars = [&quot;a&quot;]</span><br><span class="line">输出：返回 1 ，输入数组的前 1 个字符应该是：[&quot;a&quot;]</span><br><span class="line">解释：</span><br><span class="line">没有任何字符串被替代。</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：chars = [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;]</span><br><span class="line">输出：返回 4 ，输入数组的前 4 个字符应该是：[&quot;a&quot;,&quot;b&quot;,&quot;1&quot;,&quot;2&quot;]。</span><br><span class="line">解释：</span><br><span class="line">由于字符 &quot;a&quot; 不重复，所以不会被压缩。&quot;bbbbbbbbbbbb&quot; 被 “b12” 替代。</span><br><span class="line">注意每个数字在数组中都有它自己的位置。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= chars.length &lt;= 2000</li><li>chars[i] 可以是小写英文字母、大写英文字母、数字或符号</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/string-compression/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/string-compression/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>模拟</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compress</span><span class="params">(self, chars: List[str])</span> -&gt; int:</span></span><br><span class="line">        n = len(chars)</span><br><span class="line">        last = chars[<span class="number">0</span>]</span><br><span class="line">        idx = <span class="number">1</span></span><br><span class="line">        cur = <span class="number">0</span></span><br><span class="line">        cnt = <span class="number">1</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">fill</span><span class="params">()</span>:</span></span><br><span class="line">            <span class="keyword">nonlocal</span> cur</span><br><span class="line">            <span class="keyword">nonlocal</span> last</span><br><span class="line">            <span class="keyword">nonlocal</span> cnt</span><br><span class="line">            chars[cur] = last</span><br><span class="line">            cur += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> cnt != <span class="number">1</span>:</span><br><span class="line">                pos = cur</span><br><span class="line">                <span class="keyword">while</span> cnt:</span><br><span class="line">                    m = cnt % <span class="number">10</span></span><br><span class="line">                    chars[cur] = str(m)</span><br><span class="line">                    cur += <span class="number">1</span></span><br><span class="line">                    cnt //= <span class="number">10</span></span><br><span class="line">                chars[pos:cur] = reversed(chars[pos:cur])</span><br><span class="line">        <span class="keyword">while</span> idx &lt; n:</span><br><span class="line">            <span class="keyword">if</span> chars[idx] != last:</span><br><span class="line">                fill()</span><br><span class="line">                last = chars[idx]</span><br><span class="line">                cnt = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">            idx += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        fill()</span><br><span class="line">        <span class="keyword">return</span> cur</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：443-压缩字符串&quot;&gt;&lt;a href=&quot;#题目：443-压缩字符串&quot; class=&quot;headerlink&quot; title=&quot;题目：443. 压缩字符串&quot;&gt;&lt;/a&gt;题目：443. 压缩字符串&lt;/h2&gt;&lt;p&gt;难度：中等&lt;/p&gt;
+&lt;p&gt;给你一个字符数组 chars 
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="字符串" scheme="https://blog.zimo.wiki/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/20</title>
+    <link href="https://blog.zimo.wiki/posts/8d0cd16c/"/>
+    <id>https://blog.zimo.wiki/posts/8d0cd16c/</id>
+    <published>2021-08-20T05:27:34.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：541-反转字符串-II"><a href="#题目：541-反转字符串-II" class="headerlink" title="题目：541. 反转字符串 II"></a>题目：541. 反转字符串 II</h2><p>难度：简单</p><p>给定一个字符串 s 和一个整数 k，从字符串开头算起，每 2k 个字符反转前 k 个字符。</p><ul><li>如果剩余字符少于 k 个，则将剩余字符全部反转。</li><li>如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。</li></ul><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;abcdefg&quot;, k = 2</span><br><span class="line">输出：&quot;bacdfeg&quot;</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;abcd&quot;, k = 2</span><br><span class="line">输出：&quot;bacd&quot;</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= s.length &lt;= 10<sup>4</sup></li><li>s 仅由小写英文组成</li><li>1 &lt;= k &lt;= 10<sup>4</sup></li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-string-ii/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-string-ii/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>模拟</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseStr</span><span class="params">(self, s: str, k: int)</span> -&gt; str:</span></span><br><span class="line">        ls = list(s)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">reverse</span><span class="params">(s,_len)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> _len &lt; k:</span><br><span class="line">                l,r = s,s + _len - <span class="number">1</span></span><br><span class="line">            <span class="comment"># elif _len &lt; k * 2 and _len &gt;= k:</span></span><br><span class="line">            <span class="comment">#     pass</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                l,r = s,s + k - <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> l &lt; r:</span><br><span class="line">                ls[l],ls[r] = ls[r],ls[l]</span><br><span class="line">                l += <span class="number">1</span></span><br><span class="line">                r -= <span class="number">1</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; len(s):</span><br><span class="line">            nexti = i + k * <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> nexti &lt; len(s):</span><br><span class="line">                reverse(i,k * <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                reverse(i,len(s) - i)</span><br><span class="line">            i = nexti</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>.join(ls)</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：541-反转字符串-II&quot;&gt;&lt;a href=&quot;#题目：541-反转字符串-II&quot; class=&quot;headerlink&quot; title=&quot;题目：541. 反转字符串 II&quot;&gt;&lt;/a&gt;题目：541. 反转字符串 II&lt;/h2&gt;&lt;p&gt;难度：简单&lt;/p&gt;
+&lt;p&gt;给定一
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="双指针" scheme="https://blog.zimo.wiki/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    
+      <category term="字符串" scheme="https://blog.zimo.wiki/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/19</title>
+    <link href="https://blog.zimo.wiki/posts/dffd3a0b/"/>
+    <id>https://blog.zimo.wiki/posts/dffd3a0b/</id>
+    <published>2021-08-19T07:16:30.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：345-反转字符串中的元音字母"><a href="#题目：345-反转字符串中的元音字母" class="headerlink" title="题目：345. 反转字符串中的元音字母"></a>题目：345. 反转字符串中的元音字母</h2><p>难度：简单</p><p>给你一个字符串 s ，仅反转字符串中的所有元音字母，并返回结果字符串。</p><p>元音字母包括 ‘a’、’e’、’i’、’o’、’u’，且可能以大小写两种形式出现。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;hello&quot;</span><br><span class="line">输出：&quot;holle&quot;</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;leetcode&quot;</span><br><span class="line">输出：&quot;leotcede&quot;</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= s.length &lt;= 3 * 10<sup>5</sup></li><li>s 由 <strong>可打印的 ASCII</strong> 字符组成</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-vowels-of-a-string/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-vowels-of-a-string/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>双指针扫描交换即可</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseVowels</span><span class="params">(self, s: str)</span> -&gt; str:</span></span><br><span class="line">        l = <span class="number">0</span></span><br><span class="line">        r = len(s) - <span class="number">1</span></span><br><span class="line">        ls = list(s)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(i)</span>:</span></span><br><span class="line">            i = str(i).lower()</span><br><span class="line">            <span class="keyword">return</span> i == <span class="string">'a'</span> <span class="keyword">or</span> i == <span class="string">'e'</span> <span class="keyword">or</span> i == <span class="string">'i'</span> <span class="keyword">or</span> i == <span class="string">'o'</span> <span class="keyword">or</span> i == <span class="string">'u'</span></span><br><span class="line">        <span class="keyword">while</span> l &lt; r:</span><br><span class="line">            <span class="keyword">while</span> l &lt; r <span class="keyword">and</span> <span class="keyword">not</span> check(ls[l]):</span><br><span class="line">                l += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> l &lt; r <span class="keyword">and</span> <span class="keyword">not</span> check(ls[r]):</span><br><span class="line">                r -= <span class="number">1</span></span><br><span class="line">            ls[r],ls[l] = ls[l],ls[r]</span><br><span class="line">            r -= <span class="number">1</span></span><br><span class="line">            l += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>.join(ls)</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：345-反转字符串中的元音字母&quot;&gt;&lt;a href=&quot;#题目：345-反转字符串中的元音字母&quot; class=&quot;headerlink&quot; title=&quot;题目：345. 反转字符串中的元音字母&quot;&gt;&lt;/a&gt;题目：345. 反转字符串中的元音字母&lt;/h2&gt;&lt;p&gt;难度：简
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="双指针" scheme="https://blog.zimo.wiki/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    
+      <category term="字符串" scheme="https://blog.zimo.wiki/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/17</title>
+    <link href="https://blog.zimo.wiki/posts/3845170c/"/>
+    <id>https://blog.zimo.wiki/posts/3845170c/</id>
+    <published>2021-08-17T06:56:06.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：551-学生出勤记录-I"><a href="#题目：551-学生出勤记录-I" class="headerlink" title="题目：551. 学生出勤记录 I"></a>题目：551. 学生出勤记录 I</h2><p>难度：简单</p><p>给你一个字符串 s 表示一个学生的出勤记录，其中的每个字符用来标记当天的出勤情况（缺勤、迟到、到场）。记录中只含下面三种字符：</p><ul><li>‘A’：Absent，缺勤</li><li>‘L’：Late，迟到</li><li>‘P’：Present，到场</li></ul><p>如果学生能够 <strong>同时</strong> 满足下面两个条件，则可以获得出勤奖励：</p><ul><li>按 <strong>总出勤</strong> 计，学生缺勤（’A’）<strong>严格</strong> 少于两天。</li><li>学生 <strong>不会</strong> 存在 <strong>连续</strong> 3 天或 <strong>连续</strong> 3 天以上的迟到（’L’）记录。</li></ul><p>如果学生可以获得出勤奖励，返回 true ；否则，返回 false 。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;PPALLP&quot;</span><br><span class="line">输出：true</span><br><span class="line">解释：学生缺勤次数少于 2 次，且不存在 3 天或以上的连续迟到记录。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;PPALLL&quot;</span><br><span class="line">输出：false</span><br><span class="line">解释：学生最后三天连续迟到，所以不满足出勤奖励的条件。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= s.length &lt;= 1000</li><li>s[i] 为 ‘A’、’L’ 或 ‘P’</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/student-attendance-record-i/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/student-attendance-record-i/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>模拟</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">checkRecord</span><span class="params">(self, s: str)</span> -&gt; bool:</span></span><br><span class="line">        a = <span class="number">0</span></span><br><span class="line">        l = <span class="number">0</span></span><br><span class="line">        b = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> idx,i <span class="keyword">in</span> enumerate(s):</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">'A'</span>:</span><br><span class="line">                a += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> i == <span class="string">'L'</span>:</span><br><span class="line">                r = idx + <span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> r &lt; len(s) <span class="keyword">and</span> s[r] == <span class="string">'L'</span>:</span><br><span class="line">                    r += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> r - idx &gt;= <span class="number">3</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> a &lt; <span class="number">2</span></span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：551-学生出勤记录-I&quot;&gt;&lt;a href=&quot;#题目：551-学生出勤记录-I&quot; class=&quot;headerlink&quot; title=&quot;题目：551. 学生出勤记录 I&quot;&gt;&lt;/a&gt;题目：551. 学生出勤记录 I&lt;/h2&gt;&lt;p&gt;难度：简单&lt;/p&gt;
+&lt;p&gt;给你一
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="字符串" scheme="https://blog.zimo.wiki/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/10</title>
+    <link href="https://blog.zimo.wiki/posts/a62182af/"/>
+    <id>https://blog.zimo.wiki/posts/a62182af/</id>
+    <published>2021-08-10T05:08:25.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：413-等差数列划分"><a href="#题目：413-等差数列划分" class="headerlink" title="题目：413. 等差数列划分"></a>题目：413. 等差数列划分</h2><p>难度：中等</p><p>如果一个数列 <strong>至少有三个元素</strong> ，并且任意两个相邻元素之差相同，则称该数列为等差数列。</p><ul><li>例如，[1,3,5,7,9]、[7,7,7,7] 和 [3,-1,-5,-9] 都是等差数列。</li></ul><p>给你一个整数数组 nums ，返回数组 nums 中所有为等差数组的 <strong>子数组</strong> 个数。</p><p><strong>子数组</strong> 是数组中的一个连续序列。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3,4]</span><br><span class="line">输出：3</span><br><span class="line">解释：nums 中有三个子等差数组：[1, 2, 3]、[2, 3, 4] 和 [1,2,3,4] 自身。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= nums.length &lt;= 5000</li><li>-1000 &lt;= nums[i] &lt;= 1000</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/arithmetic-slices/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/arithmetic-slices/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>枚举</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        <span class="keyword">if</span> n &lt; <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        d = nums[<span class="number">1</span>] - nums[<span class="number">0</span>]</span><br><span class="line">        t = <span class="number">0</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n):</span><br><span class="line">            <span class="keyword">if</span> nums[i] - nums[i - <span class="number">1</span>] == d:</span><br><span class="line">                t += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                d = nums[i] - nums[i - <span class="number">1</span>]</span><br><span class="line">                t = <span class="number">0</span></span><br><span class="line">            ans += t</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：413-等差数列划分&quot;&gt;&lt;a href=&quot;#题目：413-等差数列划分&quot; class=&quot;headerlink&quot; title=&quot;题目：413. 等差数列划分&quot;&gt;&lt;/a&gt;题目：413. 等差数列划分&lt;/h2&gt;&lt;p&gt;难度：中等&lt;/p&gt;
+&lt;p&gt;如果一个数列 &lt;str
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数组" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+      <category term="枚举" scheme="https://blog.zimo.wiki/tags/%E6%9E%9A%E4%B8%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/9</title>
+    <link href="https://blog.zimo.wiki/posts/9c643081/"/>
+    <id>https://blog.zimo.wiki/posts/9c643081/</id>
+    <published>2021-08-09T02:54:58.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：313-超级丑数"><a href="#题目：313-超级丑数" class="headerlink" title="题目：313. 超级丑数"></a>题目：313. 超级丑数</h2><p>难度：中等</p><p><strong>超级丑数</strong> 是一个正整数，并满足其所有质因数都出现在质数数组 primes 中。</p><p>给你一个整数 n 和一个整数数组 primes ，返回第 n 个 <strong>超级丑数</strong> 。</p><p>题目数据保证第 n 个 <strong>超级丑数</strong> 在 <strong>32-bit</strong> 带符号整数范围内。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 12, primes = [2,7,13,19]</span><br><span class="line">输出：32 </span><br><span class="line">解释：给定长度为 4 的质数数组 primes = [2,7,13,19]，前 12 个超级丑数序列为：[1,2,4,7,8,13,14,16,19,26,28,32] 。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1, primes = [2,3,5]</span><br><span class="line">输出：1</span><br><span class="line">解释：1 不含质因数，因此它的所有质因数都在质数数组 primes = [2,3,5] 中。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= n &lt;= 10<sup>6</sup></li><li>1 &lt;= primes.length &lt;= 100</li><li>2 &lt;= primes[i] &lt;= 1000</li><li>题目数据<strong>保证</strong> primes[i] 是一个质数</li><li>primes 中的所有值都 <strong>互不相同</strong> ，且按 <strong>递增顺序</strong> 排列</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/super-ugly-number/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/super-ugly-number/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>动态规划</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nthSuperUglyNumber</span><span class="params">(self, n: int, primes: List[int])</span> -&gt; int:</span></span><br><span class="line">        q = [<span class="number">0</span>] * len(primes)</span><br><span class="line">        uglys = [<span class="number">0</span>] * n</span><br><span class="line">        uglys[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n):</span><br><span class="line">            _min = maxsize</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(len(primes)):</span><br><span class="line">                t = uglys[q[j]] * primes[j]</span><br><span class="line">                <span class="keyword">if</span> _min &gt; t:</span><br><span class="line">                    _min = t</span><br><span class="line">            uglys[i] = _min</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(len(primes)):</span><br><span class="line">                <span class="keyword">if</span> uglys[i] == uglys[q[j]] * primes[j]:</span><br><span class="line">                    q[j] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> uglys[n - <span class="number">1</span>]</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：313-超级丑数&quot;&gt;&lt;a href=&quot;#题目：313-超级丑数&quot; class=&quot;headerlink&quot; title=&quot;题目：313. 超级丑数&quot;&gt;&lt;/a&gt;题目：313. 超级丑数&lt;/h2&gt;&lt;p&gt;难度：中等&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;超级丑数&lt;/stron
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="动态规划" scheme="https://blog.zimo.wiki/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="数学" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="dp" scheme="https://blog.zimo.wiki/tags/dp/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/8</title>
+    <link href="https://blog.zimo.wiki/posts/eb630017/"/>
+    <id>https://blog.zimo.wiki/posts/eb630017/</id>
+    <published>2021-08-08T05:55:11.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：1137-第-N-个泰波那契数"><a href="#题目：1137-第-N-个泰波那契数" class="headerlink" title="题目：1137. 第 N 个泰波那契数"></a>题目：1137. 第 N 个泰波那契数</h2><p>难度：简单</p><p>泰波那契序列 T<sub>n</sub> 定义如下： </p><p>T<sub>0</sub> = 0, T<sub>1</sub> = 1, T<sub>2</sub> = 1, 且在 n &gt;= 0 的条件下 T<sub>n+3</sub> = T<sub>n</sub> + T<sub>n+1</sub> + T<sub>n+2</sub></p><p>给你整数 n，请返回第 n 个泰波那契数 T<sub>n </sub>的值。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 4</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">T_3 = 0 + 1 + 1 = 2</span><br><span class="line">T_4 = 1 + 1 + 2 = 4</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 25</span><br><span class="line">输出：1389537</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>0 &lt;= n &lt;= 37</li><li>答案保证是一个 32 位整数，即 answer &lt;= 2^31 - 1。</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/n-th-tribonacci-number/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/n-th-tribonacci-number/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>按照定义 递推就可以了</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tribonacci</span><span class="params">(self, n: int)</span> -&gt; int:</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span> <span class="keyword">or</span> n == <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        t0 = <span class="number">0</span></span><br><span class="line">        t1 = <span class="number">1</span></span><br><span class="line">        t2 = <span class="number">1</span></span><br><span class="line">        t3 = t0 + t1 + t2</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>,n):</span><br><span class="line">            t0 = t1</span><br><span class="line">            t1 = t2</span><br><span class="line">            t2 = t3</span><br><span class="line">            t3 = t0 + t1 + t2</span><br><span class="line">        <span class="keyword">return</span> t3</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：1137-第-N-个泰波那契数&quot;&gt;&lt;a href=&quot;#题目：1137-第-N-个泰波那契数&quot; class=&quot;headerlink&quot; title=&quot;题目：1137. 第 N 个泰波那契数&quot;&gt;&lt;/a&gt;题目：1137. 第 N 个泰波那契数&lt;/h2&gt;&lt;p&gt;难度：简
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数学" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/7</title>
+    <link href="https://blog.zimo.wiki/posts/7bdc1d86/"/>
+    <id>https://blog.zimo.wiki/posts/7bdc1d86/</id>
+    <published>2021-08-07T10:26:17.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：457-环形数组是否存在循环"><a href="#题目：457-环形数组是否存在循环" class="headerlink" title="题目：457. 环形数组是否存在循环"></a>题目：457. 环形数组是否存在循环</h2><p>难度：中等</p><p>存在一个不含 0 的<strong>环形</strong>数组 nums ，每个 nums[i] 都表示位于下标 i 的角色应该向前或向后移动的下标个数：</p><ul><li>如果 nums[i] 是正数，<strong>向前</strong> 移动 nums[i] 步</li><li>如果 nums[i] 是负数，<strong>向后</strong> 移动 nums[i] 步</li></ul><p>因为数组是 <strong>环形</strong> 的，所以可以假设从最后一个元素向前移动一步会到达第一个元素，而第一个元素向后移动一步会到达最后一个元素。</p><p>数组中的 <strong>循环</strong> 由长度为 k 的下标序列 seq ：</p><ul><li>遵循上述移动规则将导致重复下标序列 seq[0] -&gt; seq[1] -&gt; … -&gt; seq[k - 1] -&gt; seq[0] -&gt; …</li><li>所有 nums[seq[j]] 应当不是 <strong>全正</strong> 就是 <strong>全负</strong></li><li>k &gt; 1</li></ul><p>如果 nums 中存在循环，返回 true ；否则，返回<em> </em>false<em> </em>。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,-1,1,2,2]</span><br><span class="line">输出：true</span><br><span class="line">解释：存在循环，按下标 0 -&gt; 2 -&gt; 3 -&gt; 0 。循环长度为 3 。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1,2]</span><br><span class="line">输出：false</span><br><span class="line">解释：按下标 1 -&gt; 1 -&gt; 1 ... 的运动无法构成循环，因为循环的长度为 1 。根据定义，循环的长度必须大于 1 。</span><br></pre></td></tr></table></figure><p><strong>示例 3:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-2,1,-1,-2,-2]</span><br><span class="line">输出：false</span><br><span class="line">解释：按下标 1 -&gt; 2 -&gt; 1 -&gt; ... 的运动无法构成循环，因为 nums[1] 是正数，而 nums[2] 是负数。</span><br><span class="line">所有 nums[seq[j]] 应当不是全正就是全负。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= nums.length &lt;= 5000</li><li>-1000 &lt;= nums[i] &lt;= 1000</li><li>nums[i] != 0</li></ul><p><strong>进阶：</strong> 你能设计一个时间复杂度为 O(n) 且额外空间复杂度为 O(1) 的算法吗？</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/circular-array-loop/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/circular-array-loop/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>题目描述很迷惑，但看懂了过后其实就是查找环，可以参考查找链表中是不是有环的做法，使用快慢双指针</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">circularArrayLoop</span><span class="params">(self, nums: List[int])</span> -&gt; bool:</span></span><br><span class="line">        n = len(nums)</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(idx)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> (idx + nums[idx] + n) % n</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i,num <span class="keyword">in</span> enumerate(nums):</span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            slow = i</span><br><span class="line">            fast = next(i)</span><br><span class="line">            <span class="keyword">while</span> nums[slow] * nums[fast] &gt; <span class="number">0</span> <span class="keyword">and</span> nums[slow] * nums[next(fast)] &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> slow == fast:</span><br><span class="line">                    <span class="keyword">if</span> slow == next(slow):</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">                slow = next(slow)</span><br><span class="line">                fast = next(next(fast))</span><br><span class="line">            t = i</span><br><span class="line">            <span class="keyword">while</span> nums[t] * nums[next(t)] &gt; <span class="number">0</span>:</span><br><span class="line">                nums[t] = <span class="number">0</span></span><br><span class="line">                t = next(t)</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：457-环形数组是否存在循环&quot;&gt;&lt;a href=&quot;#题目：457-环形数组是否存在循环&quot; class=&quot;headerlink&quot; title=&quot;题目：457. 环形数组是否存在循环&quot;&gt;&lt;/a&gt;题目：457. 环形数组是否存在循环&lt;/h2&gt;&lt;p&gt;难度：中等&lt;/p
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="双指针" scheme="https://blog.zimo.wiki/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    
+      <category term="数组" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/6</title>
+    <link href="https://blog.zimo.wiki/posts/cdb2d10/"/>
+    <id>https://blog.zimo.wiki/posts/cdb2d10/</id>
+    <published>2021-08-06T05:25:10.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：847-访问所有节点的最短路径"><a href="#题目：847-访问所有节点的最短路径" class="headerlink" title="题目：847. 访问所有节点的最短路径"></a>题目：847. 访问所有节点的最短路径</h2><p>难度：困难</p><p>存在一个由 n 个节点组成的无向连通图，图中的节点按从 0 到 n - 1 编号。</p><p>给你一个数组 graph 表示这个图。其中，graph[i] 是一个列表，由所有与节点 i 直接相连的节点组成。</p><p>返回能够访问所有节点的最短路径的长度。你可以在任一节点开始和停止，也可以多次重访节点，并且可以重用边。</p><p><strong>示例 1：</strong></p><img style="width: 222px; height: 183px;" src="https://assets.leetcode.com/uploads/2021/05/12/shortest1-graph.jpg" alt><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1,2,3],[0],[0],[0]]</span><br><span class="line">输出：4</span><br><span class="line">解释：一种可能的路径为 [1,0,2,0,3]</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><img style="width: 382px; height: 222px;" src="https://assets.leetcode.com/uploads/2021/05/12/shortest2-graph.jpg" alt><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1],[0,2,4],[1,3,4],[2],[1,2]]</span><br><span class="line">输出：4</span><br><span class="line">解释：一种可能的路径为 [0,1,4,2,3]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>n == graph.length</li><li>1 &lt;= n &lt;= 12</li><li>0 &lt;= graph[i].length &lt; n</li><li>graph[i] 不包含 i</li><li>如果 graph[a] 包含 b ，那么 graph[b] 也包含 a</li><li>输入的图总是连通图</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shortest-path-visiting-all-nodes/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/shortest-path-visiting-all-nodes/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>抄袭官方题解</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">shortestPathLength</span><span class="params">(self, graph: List[List[int]])</span> -&gt; int:</span></span><br><span class="line">        n = len(graph)</span><br><span class="line">        q = deque((i, <span class="number">1</span> &lt;&lt; i, <span class="number">0</span>) <span class="keyword">for</span> i <span class="keyword">in</span> range(n))</span><br><span class="line">        seen = &#123;(i, <span class="number">1</span> &lt;&lt; i) <span class="keyword">for</span> i <span class="keyword">in</span> range(n)&#125;</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> q:</span><br><span class="line">            u, mask, dist = q.popleft()</span><br><span class="line">            <span class="keyword">if</span> mask == (<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>:</span><br><span class="line">                ans = dist</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># 搜索相邻的节点</span></span><br><span class="line">            <span class="keyword">for</span> v <span class="keyword">in</span> graph[u]:</span><br><span class="line">                <span class="comment"># 将 mask 的第 v 位置为 1</span></span><br><span class="line">                mask_v = mask | (<span class="number">1</span> &lt;&lt; v)</span><br><span class="line">                <span class="keyword">if</span> (v, mask_v) <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                    q.append((v, mask_v, dist + <span class="number">1</span>))</span><br><span class="line">                    seen.add((v, mask_v))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：847-访问所有节点的最短路径&quot;&gt;&lt;a href=&quot;#题目：847-访问所有节点的最短路径&quot; class=&quot;headerlink&quot; title=&quot;题目：847. 访问所有节点的最短路径&quot;&gt;&lt;/a&gt;题目：847. 访问所有节点的最短路径&lt;/h2&gt;&lt;p&gt;难度：困
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="广度优先搜索" scheme="https://blog.zimo.wiki/tags/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/"/>
+    
+      <category term="bfs" scheme="https://blog.zimo.wiki/tags/bfs/"/>
+    
+      <category term="图" scheme="https://blog.zimo.wiki/tags/%E5%9B%BE/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+      <category term="状态压缩" scheme="https://blog.zimo.wiki/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/5</title>
+    <link href="https://blog.zimo.wiki/posts/95d27caa/"/>
+    <id>https://blog.zimo.wiki/posts/95d27caa/</id>
+    <published>2021-08-05T05:36:19.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：802-找到最终的安全状态"><a href="#题目：802-找到最终的安全状态" class="headerlink" title="题目：802. 找到最终的安全状态"></a>题目：802. 找到最终的安全状态</h2><p>难度：中等</p><p>在有向图中，以某个节点为起始节点，从该点出发，每一步沿着图中的一条有向边行走。如果到达的节点是终点（即它没有连出的有向边），则停止。</p><p>对于一个起始节点，如果从该节点出发，<strong>无论每一步选择沿哪条有向边行走</strong>，最后必然在有限步内到达终点，则将该起始节点称作是 <strong>安全</strong> 的。</p><p>返回一个由图中所有安全的起始节点组成的数组作为答案。答案数组中的元素应当按 <strong>升序</strong> 排列。</p><p>该有向图有 n 个节点，按 0 到 n - 1 编号，其中 n 是 graph 的节点数。图以下述形式给出：graph[i] 是编号 j 节点的一个列表，满足 (i, j) 是图的一条有向边。</p><p><strong>示例 1：</strong></p><img style="height: 171px; width: 600px;" src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/03/17/picture1.png" alt="Illustration of graph"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1,2],[2,3],[5],[0],[5],[],[]]</span><br><span class="line">输出：[2,4,5,6]</span><br><span class="line">解释：示意图如上。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1,2,3,4],[1,2],[3,4],[0,4],[]]</span><br><span class="line">输出：[4]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>n == graph.length</li><li>1 &lt;= n &lt;= 10<sup>4</sup></li><li>0 &lt;= graph[i].length &lt;= n</li><li>graph[i] 按严格递增顺序排列。</li><li>图中可能包含自环。</li><li>图中边的数目在范围 [1, 4 * 10<sup>4</sup>] 内。</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/find-eventual-safe-states/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/find-eventual-safe-states/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>安全节点就是不在环上的节点，所以dfs搜索一下就可以了</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eventualSafeNodes</span><span class="params">(self, graph: List[List[int]])</span> -&gt; List[int]:</span></span><br><span class="line">        n = len(graph)</span><br><span class="line">        color = [<span class="number">-1</span>] * n</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(x)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> color[x] &gt; <span class="number">-1</span>:</span><br><span class="line">                <span class="keyword">return</span> color[x] == <span class="number">1</span></span><br><span class="line">            color[x] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> graph[x]:</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> dfs(i):</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            color[x] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> [i <span class="keyword">for</span> i <span class="keyword">in</span> range(n) <span class="keyword">if</span> dfs(i)]</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：802-找到最终的安全状态&quot;&gt;&lt;a href=&quot;#题目：802-找到最终的安全状态&quot; class=&quot;headerlink&quot; title=&quot;题目：802. 找到最终的安全状态&quot;&gt;&lt;/a&gt;题目：802. 找到最终的安全状态&lt;/h2&gt;&lt;p&gt;难度：中等&lt;/p&gt;
+&lt;p
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="深度优先搜索" scheme="https://blog.zimo.wiki/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/"/>
+    
+      <category term="dfs" scheme="https://blog.zimo.wiki/tags/dfs/"/>
+    
+      <category term="图" scheme="https://blog.zimo.wiki/tags/%E5%9B%BE/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/4</title>
+    <link href="https://blog.zimo.wiki/posts/e2d54c3c/"/>
+    <id>https://blog.zimo.wiki/posts/e2d54c3c/</id>
+    <published>2021-08-04T03:17:10.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：611-有效三角形的个数"><a href="#题目：611-有效三角形的个数" class="headerlink" title="题目：611. 有效三角形的个数"></a>题目：611. 有效三角形的个数</h2><p>难度：中等</p><p>给定一个包含非负整数的数组，你的任务是统计其中可以组成三角形三条边的三元组个数。</p><p><strong>示例 1:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,2,3,4]</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">有效的组合是: </span><br><span class="line">2,3,4 (使用第一个 2)</span><br><span class="line">2,3,4 (使用第二个 2)</span><br><span class="line">2,2,3</span><br></pre></td></tr></table></figure><p><strong>注意:</strong></p><ol><li>数组长度不超过1000。</li><li>数组里整数的范围为 [0, 1000]。</li></ol><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/valid-triangle-number/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/valid-triangle-number/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>排序后用双指针枚举</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">triangleNumber</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        nums.sort()</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n - <span class="number">1</span>,<span class="number">1</span>,<span class="number">-1</span>):</span><br><span class="line">            l = <span class="number">0</span></span><br><span class="line">            r = i - <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> l &lt; r:</span><br><span class="line">                <span class="keyword">if</span> nums[l] + nums[r] &gt; nums[i]:</span><br><span class="line">                    ans += r - l</span><br><span class="line">                    r -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    l += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：611-有效三角形的个数&quot;&gt;&lt;a href=&quot;#题目：611-有效三角形的个数&quot; class=&quot;headerlink&quot; title=&quot;题目：611. 有效三角形的个数&quot;&gt;&lt;/a&gt;题目：611. 有效三角形的个数&lt;/h2&gt;&lt;p&gt;难度：中等&lt;/p&gt;
+&lt;p&gt;给定一
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="双指针" scheme="https://blog.zimo.wiki/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    
+      <category term="数组" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/3</title>
+    <link href="https://blog.zimo.wiki/posts/7cb1d99f/"/>
+    <id>https://blog.zimo.wiki/posts/7cb1d99f/</id>
+    <published>2021-08-03T04:49:53.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：581-最短无序连续子数组"><a href="#题目：581-最短无序连续子数组" class="headerlink" title="题目：581. 最短无序连续子数组"></a>题目：581. 最短无序连续子数组</h2><p>难度：中等</p><p>给你一个整数数组 nums ，你需要找出一个 <strong>连续子数组</strong> ，如果对这个子数组进行升序排序，那么整个数组都会变为升序排序。</p><p>请你找出符合题意的 <strong>最短</strong> 子数组，并输出它的长度。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,6,4,8,10,9,15]</span><br><span class="line">输出：5</span><br><span class="line">解释：你只需要对 [6, 4, 8, 10, 9] 进行升序排序，那么整个表都会变为升序排序。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3,4]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= nums.length &lt;= 10<sup>4</sup></li><li>-10<sup>5</sup> &lt;= nums[i] &lt;= 10<sup>5</sup></li></ul><p><strong>进阶：</strong> 你可以设计一个时间复杂度为 O(n) 的解决方案吗？</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>排序后对比一下两个数组就知道了</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findUnsortedSubarray</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        nums2 = sorted(nums)</span><br><span class="line">        l = <span class="number">0</span></span><br><span class="line">        r = len(nums) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> l &lt; len(nums):</span><br><span class="line">            <span class="keyword">if</span> nums[l] != nums2[l]:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            l += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> r &gt; l:</span><br><span class="line">            <span class="keyword">if</span> nums[r] != nums2[r]:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            r -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> r - l + <span class="number">1</span></span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：581-最短无序连续子数组&quot;&gt;&lt;a href=&quot;#题目：581-最短无序连续子数组&quot; class=&quot;headerlink&quot; title=&quot;题目：581. 最短无序连续子数组&quot;&gt;&lt;/a&gt;题目：581. 最短无序连续子数组&lt;/h2&gt;&lt;p&gt;难度：中等&lt;/p&gt;
+&lt;p
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数组" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="排序" scheme="https://blog.zimo.wiki/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/2</title>
+    <link href="https://blog.zimo.wiki/posts/bb6e909/"/>
+    <id>https://blog.zimo.wiki/posts/bb6e909/</id>
+    <published>2021-08-02T05:33:57.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：743-网络延迟时间"><a href="#题目：743-网络延迟时间" class="headerlink" title="题目：743. 网络延迟时间"></a>题目：743. 网络延迟时间</h2><p>难度：中等</p><p>有 n 个网络节点，标记为 1 到 n。</p><p>给你一个列表 times，表示信号经过 <strong>有向</strong> 边的传递时间。 times[i] = (u<sub>i</sub>, v<sub>i</sub>, w<sub>i</sub>)，其中 u<sub>i</sub> 是源节点，v<sub>i</sub> 是目标节点， w<sub>i</sub> 是一个信号从源节点传递到目标节点的时间。</p><p>现在，从某个节点 K 发出一个信号。需要多久才能使所有节点都收到信号？如果不能使所有节点收到信号，返回 -1 。</p><p><strong>示例 1：</strong></p><img style="height: 220px; width: 200px;" src="https://assets.leetcode.com/uploads/2019/05/23/931_example_1.png" alt><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：times = [[2,1,1],[2,3,1],[3,4,1]], n = 4, k = 2</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：times = [[1,2,1]], n = 2, k = 1</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：times = [[1,2,1]], n = 2, k = 2</span><br><span class="line">输出：-1</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>1 &lt;= k &lt;= n &lt;= 100</li><li>1 &lt;= times.length &lt;= 6000</li><li>times[i].length == 3</li><li>1 &lt;= u<sub>i</sub>, v<sub>i</sub> &lt;= n</li><li>u<sub>i</sub> != v<sub>i</sub></li><li>0 &lt;= w<sub>i</sub> &lt;= 100</li><li>所有 (u<sub>i</sub>, v<sub>i</sub>) 对都 <strong>互不相同</strong>（即，不含重复边）</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/network-delay-time/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/network-delay-time/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>dijkstra求最短路裸题</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">networkDelayTime</span><span class="params">(self, times: List[List[int]], n: int, k: int)</span> -&gt; int:</span></span><br><span class="line">        <span class="comment"># 建图</span></span><br><span class="line">        g = defaultdict(list)</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> times:</span><br><span class="line">            g[x[<span class="number">0</span>]].append((x[<span class="number">1</span>],x[<span class="number">2</span>]))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># dijkstra</span></span><br><span class="line">        s = k</span><br><span class="line">        vis = defaultdict(bool)</span><br><span class="line">        d = defaultdict(int)</span><br><span class="line">        inf = maxsize</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n + <span class="number">1</span>):</span><br><span class="line">            d[i] = inf</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> g[s]:</span><br><span class="line">            d[x[<span class="number">0</span>]] = x[<span class="number">1</span>]</span><br><span class="line">        d[s] = <span class="number">0</span></span><br><span class="line">        vis[s] = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        cnt = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> cnt &lt; n:</span><br><span class="line">            _min = inf</span><br><span class="line">            idx = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> vis[i]:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">if</span> _min &gt; d[i]:</span><br><span class="line">                    _min = d[i]</span><br><span class="line">                    idx = i</span><br><span class="line"></span><br><span class="line">            vis[idx] = <span class="literal">True</span></span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> g[idx]:</span><br><span class="line">                <span class="keyword">if</span> d[x[<span class="number">0</span>]] &gt; d[idx] + x[<span class="number">1</span>]:</span><br><span class="line">                    d[x[<span class="number">0</span>]] = d[idx] + x[<span class="number">1</span>]</span><br><span class="line">        ans = max(d.values())</span><br><span class="line">        <span class="keyword">return</span> ans <span class="keyword">if</span> ans != maxsize <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：743-网络延迟时间&quot;&gt;&lt;a href=&quot;#题目：743-网络延迟时间&quot; class=&quot;headerlink&quot; title=&quot;题目：743. 网络延迟时间&quot;&gt;&lt;/a&gt;题目：743. 网络延迟时间&lt;/h2&gt;&lt;p&gt;难度：中等&lt;/p&gt;
+&lt;p&gt;有 n 个网络节点，标
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+      <category term="dijkstra" scheme="https://blog.zimo.wiki/tags/dijkstra/"/>
+    
+      <category term="最短路" scheme="https://blog.zimo.wiki/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/8/1</title>
+    <link href="https://blog.zimo.wiki/posts/92bfb8b3/"/>
+    <id>https://blog.zimo.wiki/posts/92bfb8b3/</id>
+    <published>2021-08-01T14:11:31.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：1337-矩阵中战斗力最弱的-K-行"><a href="#题目：1337-矩阵中战斗力最弱的-K-行" class="headerlink" title="题目：1337. 矩阵中战斗力最弱的 K 行"></a>题目：1337. 矩阵中战斗力最弱的 K 行</h2><p>难度：简单</p><p>给你一个大小为 m * n 的矩阵 mat，矩阵由若干军人和平民组成，分别用 1 和 0 表示。</p><p>请你返回矩阵中战斗力最弱的 k 行的索引，按从最弱到最强排序。</p><p>如果第 <em><strong>i</strong></em> 行的军人数量少于第 <em><strong>j</strong></em> 行，或者两行军人数量相同但<em><strong>i</strong></em> 小于 <em><strong>j</strong></em>，那么我们认为第<em> <strong>i</strong></em>行的战斗力比第<em><strong>j</strong></em>行弱。</p><p>军人 <strong>总是</strong> 排在一行中的靠前位置，也就是说 1 总是出现在 0 之前。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">输入：mat = </span><br><span class="line">[[1,1,0,0,0],</span><br><span class="line"> [1,1,1,1,0],</span><br><span class="line"> [1,0,0,0,0],</span><br><span class="line"> [1,1,0,0,0],</span><br><span class="line"> [1,1,1,1,1]], </span><br><span class="line">k = 3</span><br><span class="line">输出：[2,0,3]</span><br><span class="line">解释：</span><br><span class="line">每行中的军人数目：</span><br><span class="line">行 0 -&gt; 2 </span><br><span class="line">行 1 -&gt; 4 </span><br><span class="line">行 2 -&gt; 1 </span><br><span class="line">行 3 -&gt; 2 </span><br><span class="line">行 4 -&gt; 5 </span><br><span class="line">从最弱到最强对这些行排序后得到 [2,0,3,1,4]</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">输入：mat = </span><br><span class="line">[[1,0,0,0],</span><br><span class="line"> [1,1,1,1],</span><br><span class="line"> [1,0,0,0],</span><br><span class="line"> [1,0,0,0]], </span><br><span class="line">k = 2</span><br><span class="line">输出：[0,2]</span><br><span class="line">解释： </span><br><span class="line">每行中的军人数目：</span><br><span class="line">行 0 -&gt; 1 </span><br><span class="line">行 1 -&gt; 4 </span><br><span class="line">行 2 -&gt; 1 </span><br><span class="line">行 3 -&gt; 1 </span><br><span class="line">从最弱到最强对这些行排序后得到 [0,2,3,1]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>m == mat.length</li><li>n == mat[i].length</li><li>2 &lt;= n, m &lt;= 100</li><li>1 &lt;= k &lt;= m</li><li>matrix[i][j] 不是 0 就是 1</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>自定义排序</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">kWeakestRows</span><span class="params">(self, mat: List[List[int]], k: int)</span> -&gt; List[int]:</span></span><br><span class="line">        arr = []</span><br><span class="line">        idx = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> mat:</span><br><span class="line">            cnt = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> r:</span><br><span class="line">                <span class="keyword">if</span> j:</span><br><span class="line">                    cnt += <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            arr.append((idx,cnt))</span><br><span class="line">            idx += <span class="number">1</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">cmp</span><span class="params">(a,b)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> a[<span class="number">1</span>] == b[<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">return</span> a[<span class="number">0</span>] - b[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">return</span> a[<span class="number">1</span>] - b[<span class="number">1</span>]</span><br><span class="line">        arr = sorted(arr,key=functools.cmp_to_key(cmp))</span><br><span class="line">        ans = [i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> arr]</span><br><span class="line">        <span class="keyword">return</span> ans[<span class="number">0</span>:k]</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：1337-矩阵中战斗力最弱的-K-行&quot;&gt;&lt;a href=&quot;#题目：1337-矩阵中战斗力最弱的-K-行&quot; class=&quot;headerlink&quot; title=&quot;题目：1337. 矩阵中战斗力最弱的 K 行&quot;&gt;&lt;/a&gt;题目：1337. 矩阵中战斗力最弱的 K 行
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数组" scheme="https://blog.zimo.wiki/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>力扣每日一题 2021/7/31</title>
+    <link href="https://blog.zimo.wiki/posts/bb73c0ed/"/>
+    <id>https://blog.zimo.wiki/posts/bb73c0ed/</id>
+    <published>2021-07-31T06:10:02.000Z</published>
+    <updated>2021-08-29T13:20:10.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目：987-二叉树的垂序遍历"><a href="#题目：987-二叉树的垂序遍历" class="headerlink" title="题目：987. 二叉树的垂序遍历"></a>题目：987. 二叉树的垂序遍历</h2><p>难度：困难</p><p>给你二叉树的根结点 root ，请你设计算法计算二叉树的<em> </em><strong>垂序遍历</strong> 序列。</p><p>对位于 (row, col) 的每个结点而言，其左右子结点分别位于 (row + 1, col - 1) 和 (row + 1, col + 1) 。树的根结点位于 (0, 0) 。</p><p>二叉树的 <strong>垂序遍历</strong> 从最左边的列开始直到最右边的列结束，按列索引每一列上的所有结点，形成一个按出现位置从上到下排序的有序列表。如果同行同列上有多个结点，则按结点的值从小到大进行排序。</p><p>返回二叉树的 <strong>垂序遍历</strong> 序列。</p><p><strong>示例 1：</strong></p><img style="width: 431px; height: 304px;" src="https://assets.leetcode.com/uploads/2021/01/29/vtree1.jpg" alt><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [3,9,20,null,null,15,7]</span><br><span class="line">输出：[[9],[3,15],[20],[7]]</span><br><span class="line">解释：</span><br><span class="line">列 -1 ：只有结点 9 在此列中。</span><br><span class="line">列  0 ：只有结点 3 和 15 在此列中，按从上到下顺序。</span><br><span class="line">列  1 ：只有结点 20 在此列中。</span><br><span class="line">列  2 ：只有结点 7 在此列中。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><img style="width: 512px; height: 304px;" src="https://assets.leetcode.com/uploads/2021/01/29/vtree2.jpg" alt><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,2,3,4,5,6,7]</span><br><span class="line">输出：[[4],[2],[1,5,6],[3],[7]]</span><br><span class="line">解释：</span><br><span class="line">列 -2 ：只有结点 4 在此列中。</span><br><span class="line">列 -1 ：只有结点 2 在此列中。</span><br><span class="line">列  0 ：结点 1 、5 和 6 都在此列中。</span><br><span class="line">          1 在上面，所以它出现在前面。</span><br><span class="line">          5 和 6 位置都是 (2, 0) ，所以按值从小到大排序，5 在 6 的前面。</span><br><span class="line">列  1 ：只有结点 3 在此列中。</span><br><span class="line">列  2 ：只有结点 7 在此列中。</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><img style="width: 512px; height: 304px;" src="https://assets.leetcode.com/uploads/2021/01/29/vtree3.jpg" alt><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,2,3,4,6,5,7]</span><br><span class="line">输出：[[4],[2],[1,5,6],[3],[7]]</span><br><span class="line">解释：</span><br><span class="line">这个示例实际上与示例 2 完全相同，只是结点 5 和 6 在树中的位置发生了交换。</span><br><span class="line">因为 5 和 6 的位置仍然相同，所以答案保持不变，仍然按值从小到大排序。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>树中结点数目总数在范围 [1, 1000] 内</li><li>0 &lt;= Node.val &lt;= 1000</li></ul><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/vertical-order-traversal-of-a-binary-tree/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/vertical-order-traversal-of-a-binary-tree/</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><blockquote><p>先遍历一遍树，将结果存在哈希表中，然后构建ans即可</p></blockquote><h2 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">verticalTraversal</span><span class="params">(self, root: TreeNode)</span> -&gt; List[List[int]]:</span></span><br><span class="line">        d = defaultdict(list)</span><br><span class="line">        _minY = <span class="number">1000</span></span><br><span class="line">        _maxY = <span class="number">-1000</span></span><br><span class="line">        _maxX = <span class="number">-1000</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(root,x,y)</span>:</span></span><br><span class="line">            <span class="keyword">nonlocal</span> _minY,_maxY,_maxX,d</span><br><span class="line">            <span class="keyword">if</span> root:</span><br><span class="line">                <span class="keyword">if</span> y &lt; _minY:</span><br><span class="line">                    _minY = y</span><br><span class="line">                <span class="keyword">if</span> y &gt; _maxY:</span><br><span class="line">                    _maxY = y</span><br><span class="line">                <span class="keyword">if</span> x &gt; _maxX:</span><br><span class="line">                    _maxX = x</span><br><span class="line">                d[<span class="string">'%d,%d'</span> % (x,y)].append(root.val)</span><br><span class="line">                d[<span class="string">'%d,%d'</span> % (x,y)].sort()</span><br><span class="line">                <span class="keyword">if</span> root.left:</span><br><span class="line">                    dfs(root.left,x + <span class="number">1</span>,y - <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">if</span> root.right:</span><br><span class="line">                    dfs(root.right,x + <span class="number">1</span>,y + <span class="number">1</span>)</span><br><span class="line">        dfs(root,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        ans = [[]]</span><br><span class="line">        idx = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> range(_minY,_maxY + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> range(_maxX + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> d.get(<span class="string">'%d,%d'</span> % (x,y)):</span><br><span class="line">                    <span class="keyword">if</span> idx &gt;= len(ans):</span><br><span class="line">                        ans.append([])</span><br><span class="line">                    ans[idx].extend(d.get(<span class="string">'%d,%d'</span> % (x,y)))</span><br><span class="line">            idx += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目：987-二叉树的垂序遍历&quot;&gt;&lt;a href=&quot;#题目：987-二叉树的垂序遍历&quot; class=&quot;headerlink&quot; title=&quot;题目：987. 二叉树的垂序遍历&quot;&gt;&lt;/a&gt;题目：987. 二叉树的垂序遍历&lt;/h2&gt;&lt;p&gt;难度：困难&lt;/p&gt;
+&lt;p&gt;给你二
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://blog.zimo.wiki/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="力扣" scheme="https://blog.zimo.wiki/tags/%E5%8A%9B%E6%89%A3/"/>
+    
+      <category term="算法" scheme="https://blog.zimo.wiki/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="题解" scheme="https://blog.zimo.wiki/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="深度优先搜索" scheme="https://blog.zimo.wiki/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/"/>
+    
+      <category term="dfs" scheme="https://blog.zimo.wiki/tags/dfs/"/>
+    
+      <category term="树" scheme="https://blog.zimo.wiki/tags/%E6%A0%91/"/>
+    
+      <category term="二叉树" scheme="https://blog.zimo.wiki/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+      <category term="python3" scheme="https://blog.zimo.wiki/tags/python3/"/>
+    
+  </entry>
+  
+</feed>
